@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:phone_authentication/Pages/clippers/custom_clippers.dart';
 
 enum loginstate { selectLanguage, mobileForm, otpForm }
 
@@ -90,6 +93,21 @@ getLanguageWiidget(context) {
                           side: BorderSide(color: Colors.blueGrey)))),
             ),
           ),
+          SizedBox(
+            height: 200,
+          ),
+          Expanded(
+            child: Stack(children: [
+              ClipPath(
+                clipper: BackCliper(),
+                child: Container(color: HexColor('#93D2F3')),
+              ),
+              ClipPath(
+                clipper: FrontCliper(),
+                child: Container(color: HexColor('#2E3B6280').withOpacity(0.5)),
+              ),
+            ]),
+          )
         ],
       )),
     ),
