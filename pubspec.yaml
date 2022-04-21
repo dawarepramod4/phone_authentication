@@ -38,7 +38,10 @@ dependencies:
   firebase_auth: ^3.3.14
   firebase_core: ^1.14.1
   hexcolor: ^2.0.6
+  intl_phone_number_input: ^0.7.0+2
+  flutter_otp_text_field: ^1.0.1
 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -7,6 +7,7 @@
   "client": [
     {
       "client_info": {
+        
         "mobilesdk_app_id": "1:1039263958463:android:f2a4e30d626f0c20ec0d0a",
         "android_client_info": {
           "package_name": "com.example.phone_authentication"
