@@ -208,10 +208,12 @@ class _LoginPageState extends State<LoginPage> {
                       width: 0.80)),
               // padding: const EdgeInsets.all(10),
               child: InternationalPhoneNumberInput(
-                formatInput: true,
+                  isEnabled: true,
+                  formatInput: true,
                   textFieldController: phonecontroller,
                   onInputChanged: (PhoneNumber number) {
                     //  number = this.number;
+                    number = this.number;
                   }),
             ),
             const SizedBox(
@@ -228,7 +230,7 @@ class _LoginPageState extends State<LoginPage> {
                   });
 
                   await _auth.verifyPhoneNumber(
-                      phoneNumber: phonecontroller.text,
+                      phoneNumber: "+91"+phonecontroller.text,
                       verificationCompleted: (phoneAuthCredential) async {
                         setState(() {
                           showloading = false;
@@ -239,7 +241,6 @@ class _LoginPageState extends State<LoginPage> {
                           showloading = false;
                         });
 
-                        
                         // ignore: deprecated_member_use
                         _scaffoldKey.currentState?.showSnackBar(SnackBar(
                             content:
@@ -306,7 +307,7 @@ class _LoginPageState extends State<LoginPage> {
                     PhoneAuthProvider.credential(
                         verificationId: verificationId,
                         smsCode: verificationCode);
-               // print(verificationCode);
+                // print(verificationCode);
 
                 signInwithPhoneAuthCredential(phoneAuthCredential);
               },
