@@ -230,10 +230,13 @@ class _LoginPageState extends State<LoginPage> {
                   });
 
                   await _auth.verifyPhoneNumber(
-                      phoneNumber: "+91"+phonecontroller.text,
+                      phoneNumber: "+91" + phonecontroller.text,
+                      timeout: const Duration(seconds: 40),
                       verificationCompleted: (phoneAuthCredential) async {
                         setState(() {
-                          showloading = false;
+                          showloading = true;
+                          otpcontroller.text =
+                              phoneAuthCredential.smsCode.toString();
                         });
                       },
                       verificationFailed: (verificationFailed) async {
@@ -250,10 +253,13 @@ class _LoginPageState extends State<LoginPage> {
                         setState(() {
                           showloading = false;
                           currentState = loginstate.otpForm;
+
                           this.verificationId = verificationId;
                         });
                       },
-                      codeAutoRetrievalTimeout: (verificationId) async {});
+                      codeAutoRetrievalTimeout: (verificationId) async {
+                        this.verificationId = verificationId;
+                      });
                 },
                 child: const Text(
                   "CONTINUE",
@@ -291,7 +297,7 @@ class _LoginPageState extends State<LoginPage> {
               width: 220,
               child: Flexible(
                 child: Text(
-                  "Code is sent to 1234567890",
+                  "Code is sent to ${phonecontroller.text}",
                   textAlign: TextAlign.center,
                   style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
                 ),
