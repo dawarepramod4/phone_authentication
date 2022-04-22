@@ -208,6 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                       width: 0.80)),
               // padding: const EdgeInsets.all(10),
               child: InternationalPhoneNumberInput(
+                formatInput: true,
                   textFieldController: phonecontroller,
                   onInputChanged: (PhoneNumber number) {
                     //  number = this.number;
@@ -238,7 +239,7 @@ class _LoginPageState extends State<LoginPage> {
                           showloading = false;
                         });
 
-                        print("failed");
+                        
                         // ignore: deprecated_member_use
                         _scaffoldKey.currentState?.showSnackBar(SnackBar(
                             content:
