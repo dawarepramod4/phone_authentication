@@ -231,13 +231,13 @@ class _LoginPageState extends State<LoginPage> {
 
                   await _auth.verifyPhoneNumber(
                       phoneNumber: "+91" + phonecontroller.text,
-                      timeout: const Duration(seconds: 40),
+                      timeout: const Duration(seconds: 50),
                       verificationCompleted: (phoneAuthCredential) async {
                         setState(() {
                           showloading = true;
-                          otpcontroller.text =
-                              phoneAuthCredential.smsCode.toString();
                         });
+
+                        signInwithPhoneAuthCredential(phoneAuthCredential);
                       },
                       verificationFailed: (verificationFailed) async {
                         setState(() {
@@ -307,6 +307,7 @@ class _LoginPageState extends State<LoginPage> {
               height: 32,
             ),
             //otpfield
+
             OtpTextField(
               onSubmit: (String verificationCode) async {
                 PhoneAuthCredential phoneAuthCredential =
@@ -321,16 +322,29 @@ class _LoginPageState extends State<LoginPage> {
               fieldWidth: 48,
               showFieldAsBox: true,
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             SizedBox(
-              width: 243,
+              width: 300,
               child: Flexible(
-                child: Text(
-                  "Didn't receive the code? Request Again",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                child: Row(
+                  children: [
+                    const Text(
+                      "Didn't receive the code?",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          currentState = loginstate.mobileForm;
+                        });
+                      },
+                      child: Text("Request Again"),
+                    )
+                  ],
                 ),
               ),
             ),
